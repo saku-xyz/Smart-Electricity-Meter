@@ -121,12 +121,12 @@ $bill_id = $_GET['bill_id'];
             document.getElementById('billData').innerHTML += `
                 <tr>
                 <td nowrap="true" style="text-align: left; padding: 5px; font-size: 18px;">Billing Date</td>
-                <td nowrap="true" style="text-align: right; padding: 5px; font-size: 18px;">${bill.serviceCharge}</td>
+                <td nowrap="true" style="text-align: right; padding: 5px; font-size: 18px;">${bill.billingDate}</td>
                 </tr>
 
                 <tr>
                 <td nowrap="true" style="text-align: left; padding: 5px; font-size: 18px;">Service Charge</td>
-                <td nowrap="true" style="text-align: right; padding: 5px; font-size: 18px;">${bill.billingDate}</td>
+                <td nowrap="true" style="text-align: right; padding: 5px; font-size: 18px;">${bill.serviceCharge}</td>
                 </tr>
 
                 <tr>
@@ -160,7 +160,7 @@ $bill_id = $_GET['bill_id'];
                     var message = "<strong>NOTICE!</strong> Pay off arrears and avoid power outages";
                     document.getElementById("notice").innerHTML = message;
                 }
-                // <strong>NOTICE!</strong> Pay off arrears and avoid power outages.
+                
         });
 
         function printBill(){

@@ -272,7 +272,7 @@
                             </div>
                         </div> -->
                         <div class="form-group row">
-                            <label for="staticEmail" class="col-sm-4 col-form-label">Due Amount</label>
+                            <label for="staticEmail" class="col-sm-4 col-form-label">Date</label>
                             <div class="input-group date col-sm-8" id="reservationdate" data-target-input="nearest">
                                 <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" id="billingDate" />
                                 <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
