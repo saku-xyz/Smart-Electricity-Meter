@@ -118,12 +118,6 @@ $bill_id = $_GET['bill_id'];
             document.getElementById('billData').innerHTML = '';
             var i = 0;
 
-            // data.forEach((bill) => {
-            //     i++;
-            //     var childKey = bill.key;
-            //     var childData = bill.val();
-            //     console.log(childKey);
-            //     console.log(childData);
             document.getElementById('billData').innerHTML += `
                 <tr>
                 <td nowrap="true" style="text-align: left; padding: 5px; font-size: 18px;">Billing Date</td>
@@ -162,7 +156,7 @@ $bill_id = $_GET['bill_id'];
                 `;
 
                 let total = bill.totalAmount;
-                if(total>500){
+                if(total>4000){
                     var message = "<strong>NOTICE!</strong> Pay off arrears and avoid power outages";
                     document.getElementById("notice").innerHTML = message;
                 }
