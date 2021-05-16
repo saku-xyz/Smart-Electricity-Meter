@@ -1,269 +1,104 @@
+<?php
+$bill_id = $_GET['bill_id'];
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Dashboard</title>
-
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- Tempusdominus Bootstrap 4 -->
-    <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-    <!-- iCheck -->
-    <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <!-- JQVMap -->
-    <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="dist/css/adminlte.min.css">
-    <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-    <!-- Daterange picker -->
-    <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
-    <!-- summernote -->
-    <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
-
-
-    <!-- Bootstrap Color Picker -->
-    <link rel="stylesheet" href="plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
-    <!-- Select2 -->
-    <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
-    <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
-    <!-- Bootstrap4 Duallistbox -->
-    <link rel="stylesheet" href="plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
-    <!-- BS Stepper -->
-    <link rel="stylesheet" href="plugins/bs-stepper/css/bs-stepper.min.css">
-    <!-- dropzonejs -->
-    <link rel="stylesheet" href="plugins/dropzone/min/dropzone.min.css">
-
-    <style>
-        input {
-            font-size: 18px !important;
-        }
-
-        label {
-            font-size: 18px !important;
-        }
-    </style>
+    <title>Bill</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 </head>
+<style type="text/css">
+    table {
+        border-collapse: collapse;
+        width: 92.5%;
+        border-spacing: 0;
+        border: 1px solid #ddd;
+        background-color: #fff;
+        margin-top: 50px;
+        margin-left: 50px;
+        margin-right: 50px;
+    }
 
-<body onload="window.print()" class="hold-transition sidebar-mini layout-fixed">
-    <div class="wrapper">
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <div class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1 class="m-0">Dashboard</h1>
-                        </div><!-- /.col -->
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Dashboard</li>
-                            </ol>
-                        </div><!-- /.col -->
-                    </div><!-- /.row -->
-                </div><!-- /.container-fluid -->
-            </div>
-            <!-- /.content-header -->
+    th,
+    td {
+        text-align: left;
+        padding: 8px;
+    }
 
-            <!-- Main content -->
-            <section class="content">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Responsive Hover Table</h3>
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
 
-                                <div class="card-tools">
-                                    <div class="input-group input-group-sm" style="width: 150px;">
-                                        <button button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">Generate Bill</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.card-header -->
-                            <div class="card-body table-responsive p-0">
-                                <table class="table table-hover text-nowrap">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Billing Date</th>
-                                            <th>Total Amount</th>
-                                            <th>Service Charge</th>
-                                            <th>Due Amount</th>
-                                            <th>Amperes</th>
-                                            <th>Daily Usage</th>
-                                            <th>Power Usage</th>
-                                            <th>Action</th>   
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tableBills">
+    .tds {
+        text-align: left;
+        padding: 5px;
+        font-size: 18px;
+    }
 
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- /.card-body -->
-                        </div>
-                        <!-- /.card -->
-                    </div>
-                </div>
-            </section>
-            <!-- /.content -->
-        </div>
-        <!-- /.content-wrapper -->
-        <footer class="main-footer">
-            <strong>Copyright &copy; 2021 <a href="https://codezilla.lk">Codezilla (Pvt) Ltd.</a>.</strong>
-            All rights reserved.
-        </footer>
+    @media (max-width: 1131px) {
+        .doc {
+            margin-left: 50px;
+            margin-right: 50px;
+            overflow-x: auto;
+        }
 
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-        </aside>
-        <!-- /.control-sidebar -->
+        table {
+            width: 100%;
+            margin-right: 0px;
+            margin-left: 0px;
+        }
+    }
+</style>
+
+<body>
+<div class="float-right mr-4">
+    <button class="btn btn-primary btn-md" onclick="window.print()">Print Bill</button>
     </div>
-    <!-- ./wrapper -->
+    <div class="container mt-5">
+    <div>
+        <div class="float-right">
+            <img src="./ceb.png" width="150px" alt="">
+        </div>
 
-    <!-- Add New User Modal -->
-    <div class="modal fade" id="modal-default">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Generate New Bill</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-
-                <div class="modal-body">
-                    <form id="addBill">
-                        <div class="form-group row">
-                            <label for="staticEmail" class="col-sm-4 col-form-label">Service Charge</label>
-                            <div class="col-sm-8">
-                                <input type="text" readonly class="form-control-plaintext text-right" id="serviceCharge" value="">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="staticEmail" class="col-sm-4 col-form-label">Amperes</label>
-                            <div class="col-sm-8">
-                                <input type="text" readonly class="form-control-plaintext text-right" id="ampval" value="">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="staticEmail" class="col-sm-4 col-form-label">Power Usage (Kw)</label>
-                            <div class="col-sm-8">
-                                <input type="text" readonly class="form-control-plaintext text-right" id="powerUsage" value="">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="staticEmail" class="col-sm-4 col-form-label">Daily Usage (kWh)</label>
-                            <div class="col-sm-8">
-                                <input type="text" readonly class="form-control-plaintext text-right" id="dailyUsage" value="">
-                            </div>
-                        </div>
-                        <!-- <div class="input-group date" id="reservationdate" data-target-input="nearest">
-                            <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" />
-                            <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                            </div>
-                        </div> -->
-                        <div class="form-group row">
-                            <label for="staticEmail" class="col-sm-4 col-form-label">Due Amount</label>
-                            <div class="input-group date col-sm-8" id="reservationdate" data-target-input="nearest">
-                                <input type="text" class="form-control datetimepicker-input" data-target="#reservationdate" id="billingDate" />
-                                <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
-                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="staticEmail" class="col-sm-4 col-form-label">Due Amount</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control text-right" id="dueAmount">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="staticEmail" class="col-sm-8" style="font-weight: bold; font-size:28px !important;">Total Amount</label>
-                            <div class="col-sm-4">
-                                <input type="text" style="font-weight: bold; font-size:28px !important;" readonly class="form-control-plaintext text-right" id="totalAmount" value="0">
-                                <!-- <h1 class="text-right" id="totalAmount">0</h1> -->
-                            </div>
-                        </div>
-                        <div>
-                            <h3 style="color: red;" id="notice"></h3>
-                        </div>
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Add to Bill</button>
-                </div>
-                </form>
-            </div>
+        <div style="position: absolute;z-index: 999;margin-top: 30px;margin-left: 50px;">
+            <h1>Ceylon Electrcity Board</h1>
+            <h3>Electrcity Bill</h3>
         </div>
     </div>
+    <table>
+        <thead>
+            <tr>
+                <th nowrap="true"
+                    style="text-align: left; padding: 5px; background-color: #000; color: #fff; font-size: 18px;">
+                    Discription</th>
+                <th nowrap="true"
+                    style="text-align: right; padding: 5px; background-color: #000; color: #fff; font-size: 18px;">Price
+                </th>
+            </tr>
+        </thead>
+        <tbody id="billData">
 
-    <!-- jQuery -->
-    <script src="plugins/jquery/jquery.min.js"></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <script>
-        $.widget.bridge('uibutton', $.ui.button)
-    </script>
-    <!-- Bootstrap 4 -->
-    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- ChartJS -->
-    <script src="plugins/chart.js/Chart.min.js"></script>
-    <!-- Sparkline -->
-    <script src="plugins/sparklines/sparkline.js"></script>
-    <!-- JQVMap -->
-    <script src="plugins/jqvmap/jquery.vmap.min.js"></script>
-    <script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-    <!-- jQuery Knob Chart -->
-    <script src="plugins/jquery-knob/jquery.knob.min.js"></script>
-    <!-- daterangepicker -->
-    <script src="plugins/moment/moment.min.js"></script>
-    <script src="plugins/daterangepicker/daterangepicker.js"></script>
-    <!-- Tempusdominus Bootstrap 4 -->
-    <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-    <!-- Summernote -->
-    <script src="plugins/summernote/summernote-bs4.min.js"></script>
-    <!-- overlayScrollbars -->
-    <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-    <!-- AdminLTE App -->
-    <script src="dist/js/adminlte.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="dist/js/demo.js"></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="dist/js/pages/dashboard.js"></script>
+        </tbody>
+    </table>
 
-    <!-- Select2 -->
-    <script src="plugins/select2/js/select2.full.min.js"></script>
-    <!-- Bootstrap4 Duallistbox -->
-    <script src="plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
-    <script src="plugins/inputmask/jquery.inputmask.min.js"></script>
-    <!-- bootstrap color picker -->
-    <script src="plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
-    <!-- Bootstrap Switch -->
-    <script src="plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
-    <!-- BS-Stepper -->
-    <script src="plugins/bs-stepper/js/bs-stepper.min.js"></script>
-    <!-- dropzonejs -->
-    <script src="plugins/dropzone/min/dropzone.min.js"></script>
+    <h4 id="notice" class="text-center mt-4" style="color: red;"></h1>
+    </div>
+   
+
 
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-analytics.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-database.js"></script>
 
     <script>
+        const queryString = window.location.search;
+        console.log(queryString);
+
+        const urlParams = new URLSearchParams(queryString);
+        const bill_id = urlParams.get('bill_id');
+        console.log(bill_id);
+
         var firebaseConfig = {
             apiKey: "AIzaSyBOfNZHQ9c_-KS6WDdGMjKSRvvGNzAFNg4",
             authDomain: "smart-power-meter-44e02.firebaseapp.com",
@@ -274,243 +109,70 @@
             appId: "1:644579599926:web:4a93acae4245a03fcc9a97",
             measurementId: "G-K930REWS3E"
         };
-        // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
 
-        firebase.database().ref().child('bar_graff').limitToLast(1).on('value', (data) => {
-            let amps = data.val();
+        firebase.database().ref('Bills').child(bill_id).on('value', (data) => {
+            let bill = data.val();
+            console.log(bill);
+
+            document.getElementById('billData').innerHTML = '';
             var i = 0;
-            var amperes = 0;
 
-            for (const amp in amps) {
-                i++
-                amperes += amps[amp];
-            }
+            // data.forEach((bill) => {
+            //     i++;
+            //     var childKey = bill.key;
+            //     var childData = bill.val();
+            //     console.log(childKey);
+            //     console.log(childData);
+            document.getElementById('billData').innerHTML += `
+                <tr>
+                <td nowrap="true" style="text-align: left; padding: 5px; font-size: 18px;">Billing Date</td>
+                <td nowrap="true" style="text-align: right; padding: 5px; font-size: 18px;">${bill.serviceCharge}</td>
+                </tr>
 
-            var s_charge = 600.00;
-            var pf = 1;
-            var v = 50;
-            var kw = pf * amperes * v / 1000;
-            // var kw = w / 1000;
-            var kWh = kw * 24;
-            var ch = 200;
-            var sub = (kw * kWh) * ch;
-            var total = sub + s_charge;
-            // var due = document.getElementById("dueAmount"); 
-            var due = 1000;
+                <tr>
+                <td nowrap="true" style="text-align: left; padding: 5px; font-size: 18px;">Service Charge</td>
+                <td nowrap="true" style="text-align: right; padding: 5px; font-size: 18px;">${bill.billingDate}</td>
+                </tr>
 
-            document.getElementById("serviceCharge").setAttribute('value', 'Rs.' + s_charge.toFixed(2));
-            document.getElementById("ampval").setAttribute('value', amperes.toFixed(2) + 'A');
-            document.getElementById("powerUsage").setAttribute('value', kw.toFixed(2));
-            document.getElementById("dailyUsage").setAttribute('value', kWh.toFixed(2));
-            document.getElementById("totalAmount").setAttribute('value', total.toFixed(2));
+                <tr>
+                <td nowrap="true" style="text-align: left; padding: 5px; font-size: 18px;">Amperes (A)</td>
+                <td nowrap="true" style="text-align: right; padding: 5px; font-size: 18px;">${bill.ampval}</td>
+                </tr>
+
+                <tr>
+                <td nowrap="true" style="text-align: left; padding: 5px; font-size: 18px;">Power Usage (Kw)</td>
+                <td nowrap="true" style="text-align: right; padding: 5px; font-size: 18px;">${bill.powerUsage}</td>
+                </tr>
+
+                <tr>
+                    <td nowrap="true" style="text-align: left; padding: 5px; font-size: 18px;">Daily Usage</td>
+                    <td nowrap="true" style="text-align: right; padding: 5px; font-size: 18px;">${bill.dailyUsage}</td>
+                </tr>
+
+                <tr>
+                    <td nowrap="true" style="text-align: left; padding: 5px; font-size: 18px;">Due Amount</td>
+                    <td nowrap="true" style="text-align: right; padding: 5px; font-size: 18px;">${bill.dueAmount}</td>
+                </tr>
+
+                <tr>
+                    <td nowrap="true" style="text-align: right; padding: 5px; font-size: 20px;"><b>Total Amount Of Bill</b></td>
+                    <td nowrap="true" style="text-align: right; padding: 5px; font-size: 20px;"><b>${bill.totalAmount}</b></td>
+                </tr>
+                `;
+
+                let total = bill.totalAmount;
+                if(total>500){
+                    var message = "<strong>NOTICE!</strong> Pay off arrears and avoid power outages";
+                    document.getElementById("notice").innerHTML = message;
+                }
+                // <strong>NOTICE!</strong> Pay off arrears and avoid power outages.
         });
 
-        $(document).ready(function() {
-            $("#dueAmount").keyup(function() {
-                var tot = $("#totalAmount").val();
-                console.log(parseInt(tot));
-                var currentValue = $(this).val();
-                var total = (parseFloat(currentValue) + parseFloat(tot));
-
-                // Setting the Div content
-                $("#totalAmount").val(total);
-
-                if (total > 4000) {
-                    note = "RED NOTICE! Pay off arrears and avoid power outages.";
-                    $("#notice").text(note);;
-                }
-            });
-        });
-
-        document.getElementById('addBill').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            var serviceCharge = document.getElementById('serviceCharge');
-            var ampval = document.getElementById('ampval');
-            var powerUsage = document.getElementById('powerUsage');
-            var dailyUsage = document.getElementById('dailyUsage');
-            var dueAmount = document.getElementById('dueAmount');
-            var totalAmount = document.getElementById('totalAmount');
-            var billingDate = document.getElementById('billingDate');
-
-            firebase.database().ref('Bills').push({
-                serviceCharge: serviceCharge.value,
-                ampval: ampval.value,
-                powerUsage: powerUsage.value,
-                dailyUsage: dailyUsage.value,
-                dueAmount: dueAmount.value,
-                totalAmount: totalAmount.value,
-                billingDate: billingDate.value,
-            });
-        });
-
-        //fetch bill details
-        firebase.database().ref('Bills').on('value', (data) => {
-            let bills = data.val();
-            document.getElementById('tableBills').innerHTML = '';
-            var i = 0;
-            for (const bill in bills) {
-                i++
-                document.getElementById('tableBills').innerHTML += `
-        <tr>
-            <td>${i}</td>
-            <td>${bills[bill].billingDate}</td>
-            <td>${bills[bill].totalAmount}</td>
-            <td>${bills[bill].serviceCharge}</td>
-            <td>${bills[bill].dueAmount}</td>
-            <td>${bills[bill].ampval}</td>
-            <td>${bills[bill].dailyUsage}</td>
-            <td>${bills[bill].powerUsage}</td>
-            <td><a href="#" class="btn btn-primary">Print</a></td>
-        </tr>
-        `;
-            }
-        });
-    </script>
-
-    <script>
-        $(function() {
-            //Initialize Select2 Elements
-            $('.select2').select2()
-
-            //Initialize Select2 Elements
-            $('.select2bs4').select2({
-                theme: 'bootstrap4'
-            })
-
-            //Datemask dd/mm/yyyy
-            $('#datemask').inputmask('dd/mm/yyyy', {
-                'placeholder': 'dd/mm/yyyy'
-            })
-            //Datemask2 mm/dd/yyyy
-            $('#datemask2').inputmask('mm/dd/yyyy', {
-                'placeholder': 'mm/dd/yyyy'
-            })
-            //Money Euro
-            $('[data-mask]').inputmask()
-
-            //Date picker
-            $('#reservationdate').datetimepicker({
-                format: 'L'
-            });
-
-            //Date and time picker
-            $('#reservationdatetime').datetimepicker({
-                icons: {
-                    time: 'far fa-clock'
-                }
-            });
-
-            //Date range picker
-            $('#reservation').daterangepicker()
-            //Date range picker with time picker
-            $('#reservationtime').daterangepicker({
-                timePicker: true,
-                timePickerIncrement: 30,
-                locale: {
-                    format: 'MM/DD/YYYY hh:mm A'
-                }
-            })
-            //Date range as a button
-            $('#daterange-btn').daterangepicker({
-                    ranges: {
-                        'Today': [moment(), moment()],
-                        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                        'This Month': [moment().startOf('month'), moment().endOf('month')],
-                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                    },
-                    startDate: moment().subtract(29, 'days'),
-                    endDate: moment()
-                },
-                function(start, end) {
-                    $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
-                }
-            )
-
-            //Timepicker
-            $('#timepicker').datetimepicker({
-                format: 'LT'
-            })
-
-            //Bootstrap Duallistbox
-            $('.duallistbox').bootstrapDualListbox()
-
-            //Colorpicker
-            $('.my-colorpicker1').colorpicker()
-            //color picker with addon
-            $('.my-colorpicker2').colorpicker()
-
-            $('.my-colorpicker2').on('colorpickerChange', function(event) {
-                $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
-            })
-
-            $("input[data-bootstrap-switch]").each(function() {
-                $(this).bootstrapSwitch('state', $(this).prop('checked'));
-            })
-
-        })
-        // BS-Stepper Init
-        document.addEventListener('DOMContentLoaded', function() {
-            window.stepper = new Stepper(document.querySelector('.bs-stepper'))
-        })
-
-        // DropzoneJS Demo Code Start
-        Dropzone.autoDiscover = false
-
-        // Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
-        var previewNode = document.querySelector("#template")
-        previewNode.id = ""
-        var previewTemplate = previewNode.parentNode.innerHTML
-        previewNode.parentNode.removeChild(previewNode)
-
-        var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
-            url: "/target-url", // Set the url
-            thumbnailWidth: 80,
-            thumbnailHeight: 80,
-            parallelUploads: 20,
-            previewTemplate: previewTemplate,
-            autoQueue: false, // Make sure the files aren't queued until manually added
-            previewsContainer: "#previews", // Define the container to display the previews
-            clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
-        })
-
-        myDropzone.on("addedfile", function(file) {
-            // Hookup the start button
-            file.previewElement.querySelector(".start").onclick = function() {
-                myDropzone.enqueueFile(file)
-            }
-        })
-
-        // Update the total progress bar
-        myDropzone.on("totaluploadprogress", function(progress) {
-            document.querySelector("#total-progress .progress-bar").style.width = progress + "%"
-        })
-
-        myDropzone.on("sending", function(file) {
-            // Show the total progress bar when upload starts
-            document.querySelector("#total-progress").style.opacity = "1"
-            // And disable the start button
-            file.previewElement.querySelector(".start").setAttribute("disabled", "disabled")
-        })
-
-        // Hide the total progress bar when nothing's uploading anymore
-        myDropzone.on("queuecomplete", function(progress) {
-            document.querySelector("#total-progress").style.opacity = "0"
-        })
-
-        // Setup the buttons for all transfers
-        // The "add files" button doesn't need to be setup because the config
-        // `clickable` has already been specified.
-        document.querySelector("#actions .start").onclick = function() {
-            myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED))
-        }
-        document.querySelector("#actions .cancel").onclick = function() {
-            myDropzone.removeAllFiles(true)
-        }
-        // DropzoneJS Demo Code End
+        function printBill(){
+            window.print();
+        } 
+        // });
     </script>
 </body>
 

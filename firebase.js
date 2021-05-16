@@ -1,4 +1,4 @@
-var firebaseConfig = {
+let firebaseConfig = {
     apiKey: "AIzaSyBOfNZHQ9c_-KS6WDdGMjKSRvvGNzAFNg4",
     authDomain: "smart-power-meter-44e02.firebaseapp.com",
     databaseURL: "https://smart-power-meter-44e02-default-rtdb.firebaseio.com",
@@ -11,6 +11,7 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+// Add New Customer
 document.getElementById('formReg').addEventListener('submit', function (e) {
     e.preventDefault();
 

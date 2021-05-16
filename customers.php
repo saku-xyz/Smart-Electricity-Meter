@@ -144,7 +144,7 @@
     </div>
     <!-- /.content-header -->
 
-    <!-- Main content -->
+    <!-- Customer Table -->
     <section class="content">
         <div class="row">
             <div class="col-12">

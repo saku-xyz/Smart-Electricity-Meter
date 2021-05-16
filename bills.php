@@ -198,7 +198,7 @@
                                             <th>Amperes</th>
                                             <th>Daily Usage</th>
                                             <th>Power Usage</th>
-                                            <th>Action</th>   
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody id="tableBills">
@@ -443,31 +443,37 @@
             });
         });
 
-        //fetch bill details
-        firebase.database().ref('Bills').child('M_PRqQlDMYA6Nx01kMz').on('value', (data) => {
-            let bills = data.val();
+        // fetch bill details
+        firebase.database().ref('Bills').on('value', (data) => {
+            // let bills = data.val();
+            // console.log(bills);
             document.getElementById('tableBills').innerHTML = '';
             var i = 0;
-            for (const bill in bills) {
-                i++
+
+            data.forEach((bill) => {
+                i++;
+                var childKey = bill.key;
+                var childData = bill.val();
+                console.log(childKey);
+                console.log(childData);
                 document.getElementById('tableBills').innerHTML += `
-        <tr>
-            <td>${i}</td>
-            <td>${bills[bill].billingDate}</td>
-            <td>${bills[bill].totalAmount}</td>
-            <td>${bills[bill].serviceCharge}</td>
-            <td>${bills[bill].dueAmount}</td>
-            <td>${bills[bill].ampval}</td>
-            <td>${bills[bill].dailyUsage}</td>
-            <td>${bills[bill].powerUsage}</td>
-            <td><a href="bill-print.php" class="btn btn-primary">Print</a></td>
-        </tr>
-        `;
-            }
+                <tr>
+                    <td>${i}</td>
+                    <td>${childData.billingDate}</td>
+                    <td>${childData.totalAmount}</td>
+                    <td>${childData.serviceCharge}</td>
+                    <td>${childData.dueAmount}</td>
+                    <td>${childData.ampval}</td>
+                    <td>${childData.dailyUsage}</td>
+                    <td>${childData.powerUsage}</td>
+                    <td><a href="bill-print.php?bill_id=${childKey}" class="btn btn-primary">Print</a></td>
+                </tr>
+                `;
+            });
         });
     </script>
 
-    <script>
+    <!-- <script>
         $(function() {
             //Initialize Select2 Elements
             $('.select2').select2()
@@ -609,7 +615,7 @@
             myDropzone.removeAllFiles(true)
         }
         // DropzoneJS Demo Code End
-    </script>
+    </script> -->
 
     <script>
         $(function() {
